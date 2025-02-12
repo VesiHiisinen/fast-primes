@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@types/node": "^22.13.1"
+  },
+  "dependencies": {
+    "queue-typescript": "^1.0.1",
+    "typescript": "^5.7.3"
+  }
+}
