@@ -1,0 +1,36 @@
+# Source files
+src/
+tsconfig.json
+
+# Development
+.git
+.github
+.vscode
+.idea
+
+# Tests
+tests/
+*.test.ts
+*.spec.ts
+vitest.config.ts
+coverage/
+
+# Build tools
+.eslintrc*
+.prettierrc*
+.husky/
+
+# CI
+.github/workflows/*.yml
+!.github/workflows/publish.yml
+
+# Misc
+*.log
+/tmp
+/output
+/out
+coverage/
+.nyc_output
+
+# Documentation source
+docs/

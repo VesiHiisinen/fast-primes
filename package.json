@@ -1,9 +1,64 @@
 {
-  "devDependencies": {
-    "@types/node": "^22.13.1"
+  "name": "fast-prime-search",
+  "version": "1.0.0",
+  "description": "High-performance prime number search using multithreading in TypeScript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "fast-prime-search": "dist/cli.js"
   },
-  "dependencies": {
-    "queue-typescript": "^1.0.1",
-    "typescript": "^5.7.3"
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "prepare": "npm run build",
+    "clean": "rm -rf dist",
+    "benchmark": "npm run build && node dist/benchmark.js"
+  },
+  "keywords": [
+    "prime",
+    "primes",
+    "prime-numbers",
+    "multithreading",
+    "worker-threads",
+    "performance",
+    "fast",
+    "typescript",
+    "nodejs"
+  ],
+  "author": "Ville Vettenranta <vettis@github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vettis/fast-prime-search.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vettis/fast-prime-search/issues"
+  },
+  "homepage": "https://github.com/vettis/fast-prime-search#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vitest/coverage-v8": "^1.3.1",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.7.3",
+    "vitest": "^1.3.1"
   }
 }

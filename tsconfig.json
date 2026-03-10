@@ -1,15 +1,23 @@
 {
-    "compilerOptions": {
-        "target": "ES2022", // Ensure target is ES2017 or higher
-        "module": "nodenext", // Use nodenext for module resolution
-        "moduleResolution": "nodenext", // Use nodenext for module resolution
-        "outDir": "./out",
-        "rootDir": "./src",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true, // Optional: Skip type checking of declaration files for faster compilation
-        "resolveJsonModule": true, // Enable JSON module loading
-    },
-    "include": ["src/**/*.ts"],
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
