@@ -19,7 +19,6 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/prefer-const': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     'no-console': 'off',
     'prefer-const': 'error',

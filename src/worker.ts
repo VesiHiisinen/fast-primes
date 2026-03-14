@@ -30,8 +30,8 @@ export const searchPrimesInRange = (range: { start: number; end: number }): numb
   return primes;
 };
 
-// Only run worker logic if this is actually a worker thread (has parentPort and workerData)
-if (parentPort && workerData) {
+// Only run worker logic if this is actually a prime search worker thread
+if (parentPort && workerData && (workerData as WorkerData).range) {
   const data = workerData as WorkerData;
   const primes = searchPrimesInRange(data.range);
   parentPort.postMessage(primes);

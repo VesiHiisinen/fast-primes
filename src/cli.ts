@@ -31,7 +31,12 @@ Examples:
 `);
 };
 
-const parseArgs = (): { range: Range; threads: number | 'max'; outputFile?: string; silent: boolean } => {
+const parseArgs = (): {
+  range: Range;
+  threads: number | 'max';
+  outputFile?: string;
+  silent: boolean;
+} => {
   const args = process.argv.slice(2);
 
   if (args.includes('-h') || args.includes('--help')) {
@@ -41,16 +46,19 @@ const parseArgs = (): { range: Range; threads: number | 'max'; outputFile?: stri
 
   if (args.includes('-v') || args.includes('--version')) {
     const packagePath = path.join(process.cwd(), 'package.json');
-    const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+    const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8')) as { version: string };
     console.log(packageJson.version);
     process.exit(0);
   }
 
-  const outputFile = args.includes('-f') || args.includes('--file') ? generateOutputPath() : undefined;
+  const outputFile =
+    args.includes('-f') || args.includes('--file') ? generateOutputPath() : undefined;
   const silent = args.includes('-s') || args.includes('--silent');
 
   // Remove flags from args
-  const filteredArgs = args.filter(arg => !['-f', '--file', '-s', '--silent', '-h', '--help', '-v', '--version'].includes(arg));
+  const filteredArgs = args.filter(
+    arg => !['-f', '--file', '-s', '--silent', '-h', '--help', '-v', '--version'].includes(arg)
+  );
 
   const start = parseInt(filteredArgs[0], 10) || 0;
   const end = parseInt(filteredArgs[1], 10) || 1000000;
@@ -95,7 +103,9 @@ const main = async (): Promise<void> => {
       showProgress: !silent,
     });
 
-    console.log(`\nFound ${result.count} primes in ${(result.duration / 1000).toFixed(2)} seconds using ${result.threads} threads.`);
+    console.log(
+      `\nFound ${result.count} primes in ${(result.duration / 1000).toFixed(2)} seconds using ${result.threads} threads.`
+    );
     console.log(`Speed: ${(result.primesPerMinute / 1000000).toFixed(2)}M primes per minute.`);
 
     if (outputFile) {
@@ -112,4 +122,4 @@ const main = async (): Promise<void> => {
   }
 };
 
-main();
+void main();

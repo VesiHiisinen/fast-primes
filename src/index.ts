@@ -43,7 +43,7 @@ export const searchPrimes = async (
   let intervalId: NodeJS.Timeout | undefined;
 
   if (showProgress || onProgress) {
-    intervalId = setInterval(() => {
+    const emitProgress = (): void => {
       loops++;
       const memoryUsage = parseFloat((process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2));
       const progress: SearchProgress = {
@@ -62,7 +62,11 @@ export const searchPrimes = async (
           `\rMem usage: ${memoryUsage} MB | Threads: ${threads} | Range: ${range.start} - ${range.end} | Searching primes: ${progress.indicator}`
         );
       }
-    }, 1000);
+    };
+
+    // Fire immediately so callers always receive at least one progress event
+    emitProgress();
+    intervalId = setInterval(emitProgress, 1000);
   }
 
   const startTime = Date.now();
