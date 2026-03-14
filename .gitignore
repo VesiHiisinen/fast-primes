@@ -8,6 +8,8 @@
 # Output files
 /output
 *.txt
+primes-*.md
+run-primes.mjs
 
 # Logs
 *.log
