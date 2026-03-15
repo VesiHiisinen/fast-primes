@@ -48,7 +48,7 @@ export interface GPUSieveResult {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const WORKER_PATH = path.join(__dirname, 'gpu-sieve-worker.js');
+const WORKER_PATH = path.join(__dirname, 'gpu-sieve-worker.mjs');
 
 // ---------------------------------------------------------------------------
 // Main entry point

@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "postbuild": "mkdir -p dist/gpu/shaders && cp src/gpu/shaders/*.wgsl dist/gpu/shaders/",
+    "postbuild": "mkdir -p dist/gpu/shaders && cp src/gpu/shaders/*.wgsl dist/gpu/shaders/ && cp src/gpu/gpu-sieve-worker.mjs dist/gpu/",
     "build:watch": "tsc --watch",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
