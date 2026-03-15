@@ -29,8 +29,36 @@ export const searchPrimes = async (
   range: Range,
   options: PrimeSearchOptions = {}
 ): Promise<SearchResult> => {
-  const { threads: threadOption = 1, showProgress = false, onProgress } = options;
+  const { threads: threadOption = 1, showProgress = false, onProgress, backend = 'auto' } = options;
 
+  // ------------------------------------------------------------------
+  // GPU path
+  // ------------------------------------------------------------------
+  if (backend === 'gpu' || backend === 'auto') {
+    try {
+      const { gpuSieve } = await import('./gpu/gpu-sieve.js');
+      const gpuResult = await gpuSieve(range);
+      return {
+        primes: gpuResult.primes,
+        count: gpuResult.count,
+        duration: gpuResult.duration,
+        primesPerMinute: gpuResult.primesPerMinute,
+        threads: 0,
+        backend: gpuResult.backend,
+        gpuDevice: gpuResult.gpuDevice,
+      };
+    } catch (err) {
+      if (backend === 'gpu') {
+        // Hard requirement — propagate
+        throw err;
+      }
+      // 'auto': GPU unavailable or failed, fall through to CPU
+    }
+  }
+
+  // ------------------------------------------------------------------
+  // CPU path
+  // ------------------------------------------------------------------
   const numPhysicalCores = getPhysicalCores();
   let threads = threadOption === 'max' ? numPhysicalCores : threadOption || 1;
   threads = Math.min(threads, numPhysicalCores);
@@ -110,6 +138,7 @@ export const searchPrimes = async (
       duration,
       primesPerMinute,
       threads,
+      backend: 'cpu',
     };
   } catch (error) {
     if (intervalId) clearInterval(intervalId);

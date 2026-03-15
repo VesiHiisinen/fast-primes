@@ -1,6 +1,7 @@
 {
   "name": "fast-prime-search",
   "version": "1.0.0",
+  "type": "module",
   "description": "High-performance prime number search using multithreading in TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,6 +15,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "postbuild": "mkdir -p dist/gpu/shaders && cp src/gpu/shaders/*.wgsl dist/gpu/shaders/",
     "build:watch": "tsc --watch",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
@@ -25,7 +27,8 @@
     "typecheck": "tsc --noEmit",
     "prepare": "npm run build",
     "clean": "rm -rf dist",
-    "benchmark": "npm run build && node dist/benchmark.js"
+    "benchmark": "npm run build && node dist/benchmark.js",
+    "benchmark:gpu": "npm run build && node dist/gpu/benchmark.js"
   },
   "keywords": [
     "prime",
@@ -60,5 +63,8 @@
     "prettier": "^3.2.5",
     "typescript": "^5.7.3",
     "vitest": "^4.1.0"
+  },
+  "dependencies": {
+    "webgpu": "^0.3.8"
   }
 }
