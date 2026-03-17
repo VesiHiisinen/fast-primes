@@ -7,6 +7,15 @@ export interface Range {
 }
 
 /**
+ * Which compute backend to use for prime search.
+ *
+ * - `'auto'`  : Try GPU first; fall back to CPU if no GPU is available.
+ * - `'gpu'`   : Require GPU (WebGPU via dawn.node).  Throws if unavailable.
+ * - `'cpu'`   : Always use CPU worker_threads.
+ */
+export type Backend = 'auto' | 'gpu' | 'cpu';
+
+/**
  * Options for prime number search
  */
 export interface PrimeSearchOptions {
@@ -16,6 +25,13 @@ export interface PrimeSearchOptions {
   showProgress?: boolean;
   /** Callback for progress updates */
   onProgress?: (progress: SearchProgress) => void;
+  /**
+   * Compute backend to use.
+   * - `'auto'` (default): GPU if available, CPU otherwise.
+   * - `'gpu'`           : Force WebGPU; throws if no GPU is detected.
+   * - `'cpu'`           : Always use CPU worker_threads.
+   */
+  backend?: Backend;
 }
 
 /**
@@ -44,8 +60,12 @@ export interface SearchResult {
   duration: number;
   /** Primes found per minute */
   primesPerMinute: number;
-  /** Number of threads used */
+  /** Number of threads used (CPU backend only; 0 for GPU) */
   threads: number;
+  /** Which backend was actually used */
+  backend?: 'cpu' | 'webgpu' | 'cuda';
+  /** GPU device name when backend is 'webgpu' or 'cuda' */
+  gpuDevice?: string;
 }
 
 /**

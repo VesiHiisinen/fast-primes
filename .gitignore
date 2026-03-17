@@ -36,5 +36,12 @@ Thumbs.db
 /tmp
 *.tmp
 
+# GPU debug/test scripts
+gpu-*-test.mjs
+gpu-*-debug.mjs
+gpu-*-verify.mjs
+gpu-*-raw.mjs
+gpu-*-isolate.mjs
+
 # Test results
 /test-results
