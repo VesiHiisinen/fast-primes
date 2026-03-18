@@ -45,3 +45,9 @@ gpu-*-isolate.mjs
 
 # Test results
 /test-results
+
+# GPU debug/test scripts (development only)
+gpu-*-test.mjs
+
+# Internal documentation
+GPU-50M-PLAN.md
